@@ -21,6 +21,15 @@ from flask import Flask
 from flask import request
 from flask import make_response
 
+from linebot import (
+    LineBotApi, WebhookHandler
+)
+from linebot.exceptions import (
+    InvalidSignatureError
+)
+from linebot.models import (
+    MessageEvent, TextMessage, TextSendMessage,
+)
 
 # firebase
 cred = credentials.Certificate("./serviceAccountKey.json")
@@ -30,6 +39,9 @@ firebase_admin.initialize_app(cred,{
 
 # Flask app should start in global layout
 app = Flask(__name__)
+
+line_bot_api = LineBotApi('fHIvKaGYZfXuMVXMt/tG1WpFztLQYqzlhDp5DB/Memvyo7TfrObM2bpXTS/W1jwlWsQulRJylBl3seFXcWr10Zu2SJldz8Qxd5sdBxxEQa3uXvxKNhU84K8CLYQ4yFstk2dhUdjEkdkMyzbzfgUHwAdB04t89/1O/w1cDnyilFU=')
+handler = WebhookHandler('0d184e88d0b01d9a5586b06abd6a1250')
 
 @app.route('/webhook', methods=['POST'])
 
@@ -58,15 +70,28 @@ def webhook():
 
 def makeWebhookResult(req):  
     a = req.get("id")
+    # get X-Line-Signature header value
+    signature = request.headers['X-Line-Signature']
+
+    # get request body as text
+    body = request.get_data(as_text=True)
+    app.logger.info("Request body: " + body)
+
+    # handle webhook body
+    w = handler.handle(body, signature)
     return {
-            "speech": a,
-            "displayText": a,
+            "speech": w,
+            "displayText": w,
             #"data": {},
             #"contextOut": [],
-            "source": a
+            "source": w
         }
         
-        
+@handler.add(MessageEvent, message=TextMessage)
+def handle_message(event):
+    return event.resource.userId
+    
+    
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 4040))
 
