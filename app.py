@@ -75,6 +75,13 @@ def makeWebhookResult(req):
 
     # get request body as text
     body = request.get_data(as_text=True)
+    return {
+            "speech": "w",
+            "displayText": "w",
+            #"data": {},
+            #"contextOut": [],
+            "source": "w"
+        }
     app.logger.info("Request body: " + body)
 
     # handle webhook body
