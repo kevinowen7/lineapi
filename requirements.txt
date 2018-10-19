@@ -4,3 +4,4 @@ bs4
 selenium
 requests
 firebase_admin
+line-bot-sdk
