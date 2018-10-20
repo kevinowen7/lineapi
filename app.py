@@ -47,8 +47,6 @@ handler = WebhookHandler('0d184e88d0b01d9a5586b06abd6a1250')
 
 
 def webhook():
-    nama = []
-    status = []
     database = db.reference()
     user = database.child("user")
     
@@ -56,19 +54,11 @@ def webhook():
     for key, val in snapshot.items():
         try:
             line_bot_api.push_message(key, TextSendMessage(text='Hello World!'))
-            nama.append(str(val))
-            status.append("Success")
         except Exception as res:
-            nama.append(str(val))
-            status.append("Failed")
+            print("error")
             
-    hasil=""
-    for i in range (0,len(nama)):
-        hasil = hasil+nama[i]+" "+status[i]+"\n"
 
-    return {
-        hasil
-    }
+    return 
 
 
 
