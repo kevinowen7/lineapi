@@ -50,9 +50,13 @@ def webhook():
     database = db.reference()
     user = database.child("user")
     
-    snapshot = user.order_by_value().get()
+    snapshot = user.order_by_key().get()
     for key, val in snapshot.items():
-        line_bot_api.push_message(key, TextSendMessage(text='Hello World!'))
+        try:
+            line_bot_api.push_message(key, TextSendMessage(text='Hello World!'))
+        except Exception as res:
+            print("error")
+        
     return "Success"
 
 
