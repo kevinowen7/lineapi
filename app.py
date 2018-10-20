@@ -47,6 +47,8 @@ handler = WebhookHandler('0d184e88d0b01d9a5586b06abd6a1250')
 
 
 def webhook():
+    return request.url
+
     database = db.reference()
     user = database.child("user")
     
