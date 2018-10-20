@@ -43,38 +43,21 @@ app = Flask(__name__)
 line_bot_api = LineBotApi('tRo0KibnDeYJgRVUj01Nnh0+MSCTUhbyZo0HgSwtfRZzGt5Gh0kZUUuiDJkOswWWWsQulRJylBl3seFXcWr10Zu2SJldz8Qxd5sdBxxEQa2k374wJdd1vcNQVrGOusGnFErAt4SPvq4FhZLUdN1vEgdB04t89/1O/w1cDnyilFU=')
 handler = WebhookHandler('0d184e88d0b01d9a5586b06abd6a1250')
 
-@app.route('/webhook', methods=['POST'])
+@app.route('/webhook', methods=['GET'])
 
 
 def webhook():
-    # get X-Line-Signature header value
-    signature = request.headers['X-Line-Signature']
+    database = db.reference()
+    user = database.child("user")
     
-    # get request body as text
-    body = request.get_data(as_text=True)
-    app.logger.info("Request body: " + body)
-
-    # handle webhook body
-    w = handler.handle(body, signature)
-    return {
-        "speech": w,
-        "displayText": w,
-        #"data": {},
-        #"contextOut": [],
-        "source": w
-    }
+    snapshot = user.order_by_value().get()
+    for key, val in snapshot.items():
+        line_bot_api.push_message(key, TextSendMessage(text='Hello World!'))
+    return "Success"
 
 
 
         
-@handler.add(MessageEvent, message=TextMessage)
-def handle_message(event):
-    profile = line_bot_api.get_profile(event.source.user_id)
-    
-    line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text=profile.display_name))
-    return profile.display_name
     
     
     
