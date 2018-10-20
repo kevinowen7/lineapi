@@ -56,7 +56,13 @@ def webhook():
 
     # handle webhook body
     w = handler.handle(body, signature)
-    return 'ok'
+    return {
+        "speech": w,
+        "displayText": w,
+        #"data": {},
+        #"contextOut": [],
+        "source": w
+    }
 
 
 
@@ -68,6 +74,7 @@ def handle_message(event):
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=profile.display_name))
+    return profile.display_name
     
     
     
