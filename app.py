@@ -48,16 +48,43 @@ handler = WebhookHandler('0d184e88d0b01d9a5586b06abd6a1250')
 
 def webhook():
     return request.url
-
     database = db.reference()
     user = database.child("user")
-    
+    x=1
+    hasillist=[]
+    hasil = database.child(str(2018)+"/"+str(10)+"/"+str(19)).get()
+
     snapshot = user.order_by_key().get()
     for key, val in snapshot.items():
         try:
-            line_bot_api.push_message(key, TextSendMessage(text='Hello World!'))
+            matkul= val["matkul"]
+            matkul1 = matkul.split("\n")
+            for i in matkul1:
+                lt=1
+                while (lt<=len(hasil)):
+                    x=1
+                    while(x<len(hasil["lantai:"+str(lt)])):
+                        if (hasil["lantai:"+str(lt)][x]["Mata Kuliah"]).lower() == i.lower():
+                            if hasil["lantai:"+str(lt)][x]["Nama Dosen"]==" ":
+                                hasillist.append("Jam: "+hasil["lantai:"+str(lt)][x]["Jam"]+"\n"+"Mata Kuliah: "+hasil["lantai:"+str(lt)][x]["Mata Kuliah"]+"\n"+"Ruangan: "+hasil["lantai:"+str(lt)][x]["Ruang"]+"\n"+"\n"+"\n")
+                            else:
+                                hasillist.append("Jam: "+hasil["lantai:"+str(lt)][x]["Jam"]+"\n"+"Mata Kuliah: "+hasil["lantai:"+str(lt)][x]["Mata Kuliah"]+"\n"+"Nama Dosen: "+hasil["lantai:"+str(lt)][x]["Nama Dosen"]+"\n"+"Ruangan: "+hasil["lantai:"+str(lt)][x]["Ruang"]+"\n"+"\n"+"\n")
+
+                        x=x+1
+                    print("    ")
+                    print("    ")
+                    print(len(hasillist))
+                    lt=lt+1
+            
+            name = val["name"]
+            print(name)
+            r=""
+            for i in hasillist:
+                r=r+i
+            line_bot_api.push_message(key, TextSendMessage(text=name+" jangan lupa yahh ada kelas di :" +"\n"+r))
         except Exception as res:
             print("error")
+            
             
 
     return "Success"
