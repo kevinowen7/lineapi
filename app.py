@@ -66,7 +66,9 @@ def webhook():
     for i in range (0,len(nama)):
         hasil = hasil+nama[i]+" "+status[i]+"\n"
 
-    return "sukses"
+    return {
+        hasil
+    }
 
 
 
