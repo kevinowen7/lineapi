@@ -56,10 +56,10 @@ def webhook():
     for key, val in snapshot.items():
         try:
             line_bot_api.push_message(key, TextSendMessage(text='Hello World!'))
-            nama.append(val)
+            nama.append(str(val))
             status.append("Success")
         except Exception as res:
-            nama.append(val)
+            nama.append(str(val))
             status.append("Failed")
             
     hasil=""
