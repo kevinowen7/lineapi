@@ -48,7 +48,7 @@ handler = WebhookHandler('0d184e88d0b01d9a5586b06abd6a1250')
 
 def webhook():
     # get X-Line-Signature header value
-    signature = ""
+    signature = request.headers['X-Line-Signature']
     
     # get request body as text
     body = request.get_data(as_text=True)
