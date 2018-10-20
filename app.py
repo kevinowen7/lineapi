@@ -69,7 +69,6 @@ def webhook():
 
 
 def makeWebhookResult(req):  
-    a = req.get("id")
     # get X-Line-Signature header value
     signature = request.headers['X-Line-Signature']
     return {
