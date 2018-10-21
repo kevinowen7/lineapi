@@ -57,8 +57,6 @@ def webhook():
     for key, val in snapshot.items():
         try:
             matkul= val["matkul"]
-            if matkul== None:
-                line_bot_api.push_message(key, TextSendMessage(text=name+" sampah"))
             matkul1 = matkul.split("\n")
             for i in matkul1:
                 lt=1
@@ -84,6 +82,7 @@ def webhook():
                 r=r+i
             line_bot_api.push_message(key, TextSendMessage(text=name+" jangan lupa yahh ada kelas di :" +"\n"+r))
         except Exception as res:
+            line_bot_api.push_message(key, TextSendMessage(text=name+" sampah"))
             print("error")
             
             
