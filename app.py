@@ -52,11 +52,13 @@ def webhook():
     x=1
     hasillist=[]
     hasil = database.child(str(2018)+"/"+str(10)+"/"+str(19)).get()
-
+        
     snapshot = user.order_by_key().get()
     for key, val in snapshot.items():
         try:
             matkul= val["matkul"]
+            if matkul== None:
+                line_bot_api.push_message(key, TextSendMessage(text=name+" sampah"))
             matkul1 = matkul.split("\n")
             for i in matkul1:
                 lt=1
