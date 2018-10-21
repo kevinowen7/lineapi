@@ -82,6 +82,7 @@ def webhook():
                 r=r+i
             line_bot_api.push_message(key, TextSendMessage(text=name+" jangan lupa yahh ada kelas di :" +"\n"+r))
         except Exception as res:
+            name = val["name"]
             line_bot_api.push_message(key, TextSendMessage(text=name+" sampah"))
             print("error")
             
