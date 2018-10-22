@@ -4,6 +4,7 @@
 import json
 import os
 import requests
+import datetime
 
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
@@ -36,6 +37,8 @@ cred = credentials.Certificate("./serviceAccountKey.json")
 firebase_admin.initialize_app(cred,{
     'databaseURL' : 'https://ithbtest.firebaseio.com'
 })
+#time
+now = datetime.datetime.now()
 
 # Flask app should start in global layout
 app = Flask(__name__)
@@ -51,7 +54,7 @@ def webhook():
     user = database.child("user")
     x=1
     hasillist=[]
-    hasil = database.child(str(2018)+"/"+str(10)+"/"+str(19)).get()
+    hasil = database.child(str(now.year)+"/"+str(now.month)+"/"+str(now.day)).get()
         
     snapshot = user.order_by_key().get()
     for key, val in snapshot.items():
