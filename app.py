@@ -75,13 +75,17 @@ def webhook():
                     print(len(hasillist))
                     lt=lt+1
             
-            name = val["name"]
-            print(name)
-            r=""
-            for i in hasillist:
-                r=r+i
-            line_bot_api.push_message(key, TextSendMessage(text=name+" jangan lupa yahh ada kelas di :" +"\n"+r))
+            if hasillist==[]:
+                line_bot_api.push_message(key, TextSendMessage(text=name+" hari ini kamu tidak ada kelas :))"))
+            else:
+                name = val["name"]
+                r=""
+                for i in hasillist:
+                    r=r+i
+                hasillist=[]
+                line_bot_api.push_message(key, TextSendMessage(text=name+" jangan lupa yahh ada kelas hari ini : " +"\n"+"\n"+r))
         except Exception as res:
+            hasillist=[]
             name = val["name"]
             line_bot_api.push_message(key, TextSendMessage(text=name+" sampah"))
             print("error")
