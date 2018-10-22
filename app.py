@@ -38,7 +38,7 @@ firebase_admin.initialize_app(cred,{
     'databaseURL' : 'https://ithbtest.firebaseio.com'
 })
 #time
-now = datetime.datetime.now()
+now = datetime.datetime.today()
 
 # Flask app should start in global layout
 app = Flask(__name__)
