@@ -64,7 +64,7 @@ def call():
     #jam 6 pagi baru akan di push
     time6 = time.split(":")[0] 
     menit = time.split(":")[1] 
-    if (time6=="01"):
+    if (time6=="02"):
         tahun = int(dateNow.split("-")[0])
         bulan = int(dateNow.split("-")[1])
         hari = int(dateNow.split("-")[2])
