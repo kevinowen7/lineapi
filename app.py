@@ -60,50 +60,52 @@ def call():
     #time
     dateNow = str(datetime.datetime.now()+ timedelta(hours=7,seconds=60)).split(" ")[0]
     time = str(datetime.datetime.now()+ timedelta(hours=7,seconds=60)).split(" ")[1]
-    
-    tahun = int(dateNow.split("-")[0])
-    bulan = int(dateNow.split("-")[1])
-    hari = int(dateNow.split("-")[2])
-    hasil = database.child(str(tahun)+"/"+str(bulan)+"/"+str(hari)).get()
-    #end time
-    line_bot_api.push_message(key, TextSendMessage(text=time))
+    #jam 6 
+    time6 = time.split(":")[0] 
+    if (time6=="06"):
+        tahun = int(dateNow.split("-")[0])
+        bulan = int(dateNow.split("-")[1])
+        hari = int(dateNow.split("-")[2])
+        hasil = database.child(str(tahun)+"/"+str(bulan)+"/"+str(hari)).get()
+        #end time
+        line_bot_api.push_message(key, TextSendMessage(text=time))
 
-    snapshot = user.order_by_key().get()
-    for key, val in snapshot.items():
-        try:
-            matkul= val["matkul"]
-            matkul1 = matkul.split("\n")
-            for i in matkul1:
-                lt=1
-                while (lt<=len(hasil)):
-                    x=1
-                    while(x<len(hasil["lantai:"+str(lt)])):
-                        if (hasil["lantai:"+str(lt)][x]["Mata Kuliah"]).lower() == i.lower():
-                            if hasil["lantai:"+str(lt)][x]["Nama Dosen"]==" ":
-                                hasillist.append("Jam: "+hasil["lantai:"+str(lt)][x]["Jam"]+"\n"+"Mata Kuliah: "+hasil["lantai:"+str(lt)][x]["Mata Kuliah"]+"\n"+"Ruangan: "+hasil["lantai:"+str(lt)][x]["Ruang"]+"\n"+"\n"+"\n")
-                            else:
-                                hasillist.append("Jam: "+hasil["lantai:"+str(lt)][x]["Jam"]+"\n"+"Mata Kuliah: "+hasil["lantai:"+str(lt)][x]["Mata Kuliah"]+"\n"+"Nama Dosen: "+hasil["lantai:"+str(lt)][x]["Nama Dosen"]+"\n"+"Ruangan: "+hasil["lantai:"+str(lt)][x]["Ruang"]+"\n"+"\n"+"\n")
+        snapshot = user.order_by_key().get()
+        for key, val in snapshot.items():
+            try:
+                matkul= val["matkul"]
+                matkul1 = matkul.split("\n")
+                for i in matkul1:
+                    lt=1
+                    while (lt<=len(hasil)):
+                        x=1
+                        while(x<len(hasil["lantai:"+str(lt)])):
+                            if (hasil["lantai:"+str(lt)][x]["Mata Kuliah"]).lower() == i.lower():
+                                if hasil["lantai:"+str(lt)][x]["Nama Dosen"]==" ":
+                                    hasillist.append("Jam: "+hasil["lantai:"+str(lt)][x]["Jam"]+"\n"+"Mata Kuliah: "+hasil["lantai:"+str(lt)][x]["Mata Kuliah"]+"\n"+"Ruangan: "+hasil["lantai:"+str(lt)][x]["Ruang"]+"\n"+"\n"+"\n")
+                                else:
+                                    hasillist.append("Jam: "+hasil["lantai:"+str(lt)][x]["Jam"]+"\n"+"Mata Kuliah: "+hasil["lantai:"+str(lt)][x]["Mata Kuliah"]+"\n"+"Nama Dosen: "+hasil["lantai:"+str(lt)][x]["Nama Dosen"]+"\n"+"Ruangan: "+hasil["lantai:"+str(lt)][x]["Ruang"]+"\n"+"\n"+"\n")
 
-                        x=x+1
-                    print("    ")
-                    print("    ")
-                    print(len(hasillist))
-                    lt=lt+1
-            
-            if hasillist==[]:
-                line_bot_api.push_message(key, TextSendMessage(text=name+" hari ini kamu tidak ada kelas :))"))
-            else:
-                name = val["name"]
-                r=""
-                for i in hasillist:
-                    r=r+i
+                            x=x+1
+                        print("    ")
+                        print("    ")
+                        print(len(hasillist))
+                        lt=lt+1
+
+                if hasillist==[]:
+                    line_bot_api.push_message(key, TextSendMessage(text=name+" hari ini kamu tidak ada kelas :))"))
+                else:
+                    name = val["name"]
+                    r=""
+                    for i in hasillist:
+                        r=r+i
+                    hasillist=[]
+                    line_bot_api.push_message(key, TextSendMessage(text=name+" jangan lupa yahh ada kelas hari ini : " +"\n"+"\n"+r))
+            except Exception as res:
                 hasillist=[]
-                line_bot_api.push_message(key, TextSendMessage(text=name+" jangan lupa yahh ada kelas hari ini : " +"\n"+"\n"+r))
-        except Exception as res:
-            hasillist=[]
-            name = val["name"]
-            line_bot_api.push_message(key, TextSendMessage(text=name+" daftarkan Matkul nya ya , supaya bisa Mina ingatkan jadwalnya"))
-            print("error")
+                name = val["name"]
+                line_bot_api.push_message(key, TextSendMessage(text=name+" daftarkan Matkul nya ya , supaya bisa Mina ingatkan jadwalnya"))
+                print("error")
             
             
 
