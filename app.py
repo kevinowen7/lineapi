@@ -58,12 +58,12 @@ def call():
     hasillist=[]
     
     #time
-    dateNow = str(datetime.datetime.now()+ timedelta(hours=7,seconds=60)).split(" ")[0]
-    time = str(datetime.datetime.now()+ timedelta(hours=7,seconds=60)).split(" ")[1]
+    dateNow = str(datetime.datetime.now()+ timedelta(hours=7)).split(" ")[0]
+    time = str(datetime.datetime.now()+ timedelta(hours=7)).split(" ")[1]
     #jam 6 
     time6 = time.split(":")[0] 
     menit = time.split(":")[1] 
-    if (time6=="01"):
+    if (time6=="06"):
         tahun = int(dateNow.split("-")[0])
         bulan = int(dateNow.split("-")[1])
         hari = int(dateNow.split("-")[2])
