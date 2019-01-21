@@ -68,6 +68,7 @@ def webhook():
     snapshot = user.order_by_key().get()
     for key, val in snapshot.items():
         try:
+            line_bot_api.push_message(key, TextSendMessage(text=tahun+"/"+bulan+"/"+hari))
             matkul= val["matkul"]
             matkul1 = matkul.split("\n")
             for i in matkul1:
