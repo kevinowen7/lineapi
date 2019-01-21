@@ -60,10 +60,11 @@ def call():
     #time
     dateNow = str(datetime.datetime.now()+ timedelta(hours=7)).split(" ")[0]
     time = str(datetime.datetime.now()+ timedelta(hours=7)).split(" ")[1]
-    #jam 6 
+    
+    #jam 6 pagi baru akan di push
     time6 = time.split(":")[0] 
     menit = time.split(":")[1] 
-    if (time6=="06"):
+    if (time6=="01"):
         tahun = int(dateNow.split("-")[0])
         bulan = int(dateNow.split("-")[1])
         hari = int(dateNow.split("-")[2])
