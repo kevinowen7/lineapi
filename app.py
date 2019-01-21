@@ -62,6 +62,7 @@ def call():
     time = str(datetime.datetime.now()+ timedelta(hours=7,seconds=60)).split(" ")[1]
     #jam 6 
     time6 = time.split(":")[0] 
+    menit = time.split(":")[1] 
     if (time6=="01"):
         tahun = int(dateNow.split("-")[0])
         bulan = int(dateNow.split("-")[1])
@@ -99,7 +100,7 @@ def call():
                     for i in hasillist:
                         r=r+i
                     hasillist=[]
-                    line_bot_api.push_message(key, TextSendMessage(text=name+" jangan lupa yahh ada kelas hari ini ("+str(hari)+"/"+str(bulan)+"/"+str(tahun)+") : " +"\n"+"\n"+r))
+                    line_bot_api.push_message(key, TextSendMessage(text=name+" jangan lupa yahh ada kelas hari ini ("+str(menit)+"/"+str(bulan)+"/"+str(tahun)+") : " +"\n"+"\n"+r))
             except Exception as res:
                 hasillist=[]
                 name = val["name"]
