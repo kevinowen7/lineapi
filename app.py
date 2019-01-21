@@ -59,12 +59,14 @@ def call():
     
     #time
     dateNow = str(datetime.datetime.now()+ timedelta(hours=7,seconds=60)).split(" ")[0]
+    time = str(datetime.datetime.now()+ timedelta(hours=7,seconds=60)).split(" ")[1]
+    
     tahun = int(dateNow.split("-")[0])
     bulan = int(dateNow.split("-")[1])
     hari = int(dateNow.split("-")[2])
     hasil = database.child(str(tahun)+"/"+str(bulan)+"/"+str(hari)).get()
     #end time
-    line_bot_api.push_message(key, TextSendMessage(text=str(datetime.datetime.now()+ timedelta(hours=7,seconds=60)).split(" ")[1]))
+    line_bot_api.push_message(key, TextSendMessage(text=time)
 
     snapshot = user.order_by_key().get()
     for key, val in snapshot.items():
