@@ -68,7 +68,6 @@ def call():
         hari = int(dateNow.split("-")[2])
         hasil = database.child(str(tahun)+"/"+str(bulan)+"/"+str(hari)).get()
         #end time
-        line_bot_api.push_message(key, TextSendMessage(text=time6))
 
         snapshot = user.order_by_key().get()
         for key, val in snapshot.items():
