@@ -62,7 +62,7 @@ def call():
     time = str(datetime.datetime.now()+ timedelta(hours=7,seconds=60)).split(" ")[1]
     #jam 6 
     time6 = time.split(":")[0] 
-    if (time6=="06"):
+    if (time6=="01"):
         tahun = int(dateNow.split("-")[0])
         bulan = int(dateNow.split("-")[1])
         hari = int(dateNow.split("-")[2])
