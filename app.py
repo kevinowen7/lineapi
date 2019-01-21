@@ -99,7 +99,7 @@ def webhook():
         except Exception as res:
             hasillist=[]
             name = val["name"]
-            line_bot_api.push_message(key, TextSendMessage(text=name+" sampah"))
+            line_bot_api.push_message(key, TextSendMessage(text=name+" daftarkan Matkul nya ya , supaya bisa Mina ingatkan jadwalnya"))
             print("error")
             
             
