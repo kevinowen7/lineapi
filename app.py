@@ -105,8 +105,11 @@ def call():
             except Exception as res:
                 hasillist=[]
                 name = val["name"]
-                line_bot_api.push_message(key, TextSendMessage(text=name+" daftarkan Matkul nya ya , supaya bisa Mina ingatkan jadwalnya"))
-                print("error")
+                try:
+                    line_bot_api.push_message(key, TextSendMessage(text=name+"Jangan lupa daftarkan Matkul nya ya , supaya bisa Mina ingatkan jadwalnya"))
+                #jika gagal push tidak ada matkul
+                except Exception as res:
+                    print("error")
             
             
 
