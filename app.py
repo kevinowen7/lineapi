@@ -35,8 +35,9 @@ from linebot.models import (
 # firebase
 cred = credentials.Certificate("./serviceAccountKey.json")
 firebase_admin.initialize_app(cred,{
-    'databaseURL' : 'https://ithbtest.firebaseio.com'
+    'databaseURL' : 'https://minabot-aceess.firebaseio.com/'
 })
+
 #time
 now = datetime.datetime.today()
 
@@ -54,8 +55,15 @@ def webhook():
     user = database.child("user")
     x=1
     hasillist=[]
-    hasil = database.child(str(now.year)+"/"+str(now.month)+"/"+str(now.day)).get()
-        
+    
+    #time
+    dateNow = str(datetime.datetime.now()+ timedelta(hours=7,seconds=60)).split(" ")[0]
+    tahun = dateNow.split("-")[0]
+    bulan = dateNow.split("-")[1]
+    hari = dateNow.split("-")[2]
+    hasil = database.child(tahun+"/"+bulan+"/"+hari).get()
+    #end time
+    
     snapshot = user.order_by_key().get()
     for key, val in snapshot.items():
         try:
