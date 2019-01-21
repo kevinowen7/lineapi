@@ -48,10 +48,10 @@ app = Flask(__name__)
 line_bot_api = LineBotApi('tRo0KibnDeYJgRVUj01Nnh0+MSCTUhbyZo0HgSwtfRZzGt5Gh0kZUUuiDJkOswWWWsQulRJylBl3seFXcWr10Zu2SJldz8Qxd5sdBxxEQa2k374wJdd1vcNQVrGOusGnFErAt4SPvq4FhZLUdN1vEgdB04t89/1O/w1cDnyilFU=')
 handler = WebhookHandler('0d184e88d0b01d9a5586b06abd6a1250')
 
-@app.route('/webhook', methods=['GET'])
+@app.route('/call', methods=['GET'])
 
 
-def webhook():
+def call():
     database = db.reference()
     user = database.child("user")
     x=1
