@@ -59,16 +59,15 @@ def webhook():
     
     #time
     dateNow = str(datetime.datetime.now()+ timedelta(hours=7,seconds=60)).split(" ")[0]
-    tahun = dateNow.split("-")[0]
-    bulan = dateNow.split("-")[1]
-    hari = dateNow.split("-")[2]
-    hasil = database.child(tahun+"/"+bulan+"/"+hari).get()
+    tahun = int(dateNow.split("-")[0])
+    bulan = int(dateNow.split("-")[1])
+    hari = int(dateNow.split("-")[2])
+    hasil = database.child(str(tahun)+"/"+str(bulan)+"/"+str(hari)).get()
     #end time
     
     snapshot = user.order_by_key().get()
     for key, val in snapshot.items():
         try:
-            line_bot_api.push_message(key, TextSendMessage(text=tahun+"/"+bulan+"/"+hari))
             matkul= val["matkul"]
             matkul1 = matkul.split("\n")
             for i in matkul1:
