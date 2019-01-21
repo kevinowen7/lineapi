@@ -92,14 +92,14 @@ def call():
                         lt=lt+1
 
                 if hasillist==[]:
-                    line_bot_api.push_message(key, TextSendMessage(text=name+" hari ini kamu tidak ada kelas :))"))
+                    line_bot_api.push_message(key, TextSendMessage(text=name+" hari ini ("+str(hari)+"/"+str(bulan)+"/"+str(tahun)+") kamu tidak ada kelas :))"))
                 else:
                     name = val["name"]
                     r=""
                     for i in hasillist:
                         r=r+i
                     hasillist=[]
-                    line_bot_api.push_message(key, TextSendMessage(text=name+" jangan lupa yahh ada kelas hari ini : " +"\n"+"\n"+r))
+                    line_bot_api.push_message(key, TextSendMessage(text=name+" jangan lupa yahh ada kelas hari ini ("+str(hari)+"/"+str(bulan)+"/"+str(tahun)+") : " +"\n"+"\n"+r))
             except Exception as res:
                 hasillist=[]
                 name = val["name"]
