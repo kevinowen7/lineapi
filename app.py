@@ -78,20 +78,24 @@ def call():
                 matkul1 = matkul.split("\n")
                 for i in matkul1:
                     lt=1
-                    while (lt<=len(hasil)):
+                    while (lt<=5):
                         x=1
-                        while(x<len(hasil["lantai:"+str(lt)])):
-                            if (hasil["lantai:"+str(lt)][x]["Mata Kuliah"]).lower() == i.lower():
-                                if hasil["lantai:"+str(lt)][x]["Nama Dosen"]==" ":
-                                    hasillist.append("Jam: "+hasil["lantai:"+str(lt)][x]["Jam"]+"\n"+"Mata Kuliah: "+hasil["lantai:"+str(lt)][x]["Mata Kuliah"]+"\n"+"Ruangan: "+hasil["lantai:"+str(lt)][x]["Ruang"]+"\n"+"\n"+"\n")
-                                else:
-                                    hasillist.append("Jam: "+hasil["lantai:"+str(lt)][x]["Jam"]+"\n"+"Mata Kuliah: "+hasil["lantai:"+str(lt)][x]["Mata Kuliah"]+"\n"+"Nama Dosen: "+hasil["lantai:"+str(lt)][x]["Nama Dosen"]+"\n"+"Ruangan: "+hasil["lantai:"+str(lt)][x]["Ruang"]+"\n"+"\n"+"\n")
+                        try:
+                            while(x<len(hasil["lantai:"+str(lt)])):
+                                if (hasil["lantai:"+str(lt)][x]["Mata Kuliah"]).lower() == i.lower():
+                                    if hasil["lantai:"+str(lt)][x]["Nama Dosen"]==" ":
+                                        hasillist.append("Jam: "+hasil["lantai:"+str(lt)][x]["Jam"]+"\n"+"Mata Kuliah: "+hasil["lantai:"+str(lt)][x]["Mata Kuliah"]+"\n"+"Ruangan: "+hasil["lantai:"+str(lt)][x]["Ruang"]+"\n"+"\n"+"\n")
+                                    else:
+                                        hasillist.append("Jam: "+hasil["lantai:"+str(lt)][x]["Jam"]+"\n"+"Mata Kuliah: "+hasil["lantai:"+str(lt)][x]["Mata Kuliah"]+"\n"+"Nama Dosen: "+hasil["lantai:"+str(lt)][x]["Nama Dosen"]+"\n"+"Ruangan: "+hasil["lantai:"+str(lt)][x]["Ruang"]+"\n"+"\n"+"\n")
 
-                            x=x+1
-                        print("    ")
-                        print("    ")
-                        print(len(hasillist))
-                        lt=lt+1
+                                x=x+1
+                            print("    ")
+                            print("    ")
+                            print(len(hasillist))
+                            lt=lt+1
+                        # jika ltnya loncat langsung lt 2 dst
+                        except Exception as res:
+                            lt=lt+1
 
                 if hasillist==[]:
                     line_bot_api.push_message(key, TextSendMessage(text=name+" hari ini ("+str(hari)+"/"+str(bulan)+"/"+str(tahun)+") kamu tidak ada kelas :))"))
