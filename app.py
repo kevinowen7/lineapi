@@ -64,7 +64,7 @@ def call():
     #jam 6 pagi baru akan di push
     time6 = time.split(":")[0] 
     menit = time.split(":")[1] 
-    if (time6=="06"):
+    if (time6=="14"):
         tahun = int(dateNow.split("-")[0])
         bulan = int(dateNow.split("-")[1])
         hari = int(dateNow.split("-")[2])
@@ -98,6 +98,7 @@ def call():
                             lt=lt+1
 
                 if hasillist==[]:
+                    name = val["name"]
                     line_bot_api.push_message(key, TextSendMessage(text=name+" hari ini ("+str(hari)+"/"+str(bulan)+"/"+str(tahun)+") kamu tidak ada kelas :))"))
                 else:
                     name = val["name"]
